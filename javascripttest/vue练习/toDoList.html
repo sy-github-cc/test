@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+        .header{
+            width: 500px;
+            margin: 0px auto;
+        }
+        .header .inputText{
+            width: 100%;
+            height: 40px;
+            background-color: black;
+            margin-bottom: 10px;
+        }
+        .header .inputText .title{
+            color:#ffffff;
+            font-size: 25px;
+            margin-right: 100px;
+        }
+        .header .content  .compete{
+           
+            border-radius: 50%;
+            border: 1px solid black;
+            padding: 2px;
+            margin-right: 0px;
+            margin-left:370px ;
+            background-color: #e9e5e3b3;
+        }
+        .disab1{
+            display: none;
+        }
+        .disab2{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <script src="../../vue.js"></script>
+    <div class="header">
+        
+        <div class="inputText">
+            <span class="title">toDoList</span>
+            <input type="text"  v-model="message">
+            <button class="append"
+            @click="appends(message)"
+            >添加</button>
+        </div>
+        
+        <div class="content">
+            <div class="ing">
+                <span class="text1" style="font-size: 25px;font-weight: bolder;">正在进行</span>
+                <span class="compete">{{ date }}</span>
+                <ul :class = "{disab1:dis}">
+                    <li v-for="(list,index) in matter">
+                        <input type="checkbox" checked="false" @click="ichange(list,index)" >
+                        {{ list }}
+                        <button @click="idelete(index)">删除</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="complete">
+                <span class="text1"style="font-size: 25px;font-weight: bolder;">已经完成</span>
+               <span class="compete">{{ cdate }}</span>
+                <ul :class="{disab2:di}">
+                    <li v-for="(demo,index) in finsh">
+                        <input type="checkbox" @click="cChange(demo,index)">
+                        {{ demo }}
+                        <button @click="cdelete(index)">删除</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'.header',
+            data:{
+                message:"",
+                matter:[],
+                finsh:[],
+                date:0,
+                cdate:0,
+                dis:true,
+                di:true,
+
+            },
+            methods:{
+                appends:function(a){
+                    this.dis=false;
+                    this.matter.push(a);
+                    this.date = this.date + 1;
+                   this.message = ""
+                },
+                idelete:function(index){
+                    this.$delete(this.matter,index);
+                    if(this.matter.length == 0 ){
+                        dis:true;
+                    };
+                    this.date = this.date - 1;
+                },
+                ichange:function(list,index){
+                    this.idelete(index);
+                    this.finsh.push(list);
+                    this.di = false;
+                    this.cdate++;
+
+                },
+                cChange:function(demo,index){
+                    this.cdelete(index);
+                    this.appends(demo);                  
+                },
+                cdelete:function(index){
+                    this.$delete(this.finsh,index);
+                    if(this.finsh.length == 0 ){
+                        di:true;
+                    };
+                    this.cdate = this.cdate - 1;
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>

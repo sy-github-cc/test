@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 3000px;
+            position:relative;
+        }
+        #editInof{
+            width:100px;
+            height: 100px;
+            border:1px black solid;
+            position: absolute;
+            margin-left: -50px;
+            margin-top: -50px;
+            left:50%;
+            top:50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="editInof">
+
+    </div>
+    <script src="../../jquery-2.1.4/jquery-2.1.4/jquery.js"></script>
+    <script> 
+        $(function(){
+            $(window).scroll(function(){
+                var newtop = $(window).scrollTop();
+                var oldTop = $(window).height() ;
+                var q = oldTop * 0.5;
+                var top = newtop + q;
+                $('#editInof').css({top:top + 'px',});
+            })
+        })
+
+    </script>
+</body>
+</html>

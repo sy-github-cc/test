@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../../vue.js"></script>
+    <div class="app">
+        <input type="text" name="qe" id="import" v-model.number.lazy="inputdigit">
+        <select name="qed" id="symbol" v-model="selected">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+    <input type="text"  id="mask" v-model.number.lazy="digit" >
+    <button @click="arith">=</button>
+    <span>{{ number }}</span>
+    </div>
+    
+    <script>
+        const vm = new Vue({
+            el:".app",
+            data:{
+                number:0,
+                inputdigit:"",
+                digit:"",
+                selected:"+",
+
+            },
+            methods:{
+                arith(){
+                    switch(this.selected){
+                        case"+":
+                            this.number = this.inputdigit + this.digit;
+                            break;
+                        case"-":
+                            this.number = this.inputdigit - this.digit;
+                            break;
+                        case"*":
+                            this.number = this.inputdigit * this.digit;
+                            break;
+                        case"/":
+                            this.number = this.inputdigit / this.digit;
+                            break;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

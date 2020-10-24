@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      /* .demo{
+        width: 100px;
+        height:100px;
+        background-color:orange;
+        margin-bottom:10px;
+      } */
+      /* .demo.active{
+        background-color:red;
+      } */
+
+    </style>
+</head>
+<body>
+  
+    <!-- <div class="demo active"></div>
+    <div class="demo"></div> -->
+    <div class="demo"></div>
+      
+  
+    <!-- <script src="../jquery-2.1.4/./jquery-2.1.4/jquery.js"></script> -->
+    <!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+
+    <script src="myjquery.js"></script>
+   <script>
+      $('.demo')
+            .css({position : 'absolute',left:0,top:0,width:'100px',height:'100px',backgroundColor:'red'})
+            .myAnimate({width:120,height:120,left:100,top:100})
+            .myDelay(2000)
+            .myAnimate({width:220,height:140,left:200,top:200})
+            .myDelay(2000)
+            .myAnimate({width:320,height:160,left:300,top:300})
+            
+   </script>
+</body>
+</html>

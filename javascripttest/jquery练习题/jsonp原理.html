@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../jquery-2.1.4/jquery-2.1.4/jquery.js"></script>
+    <script>
+        var $ = {
+				ajax:function(options){
+					var url = options.url || '';
+					var method = options.method || 'GET';
+					var dataType = options.dataType || 'jsonp';
+					var targetProtocol = '';
+					var targetHost = '';
+					if(url.indexOf('http://') == 0 || url.indexOf('https://') == 0){
+						var targetUrl = new URL(url);
+						targetProtocol = targetUrl.protocol;
+						targetHost = targetUrl.host;
+					}else{
+						targetProtocol = location.protocol;
+						targetHost = location.host;
+					}
+					if(dataType == 'jsonp'){
+						if(location.protocol == targetProtocol && location.host == targetHost){
+							//同源当做普通ajax请求处理
+						}else{
+							var callback = 'cb' + Math.floor(Math.random() * 1000000);
+							window[callback] = options.success;
+							var script = document.createElement('script');
+							if(url.indexOf('?') > 0){
+								script.src = url + '&callback=' + callback;
+							}else{
+								script.src = url + '?callback=' + callback;
+							}
+							console.log(callback);
+							script.id = callback;
+							document.head.appendChild(script);
+						}
+					}
+				}
+			}
+    </script>
+</body>
+</html>
